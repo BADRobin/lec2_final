@@ -8,44 +8,28 @@ public class Movie {
 
     private MovieType _type;
 
-    public Movie(String title, int type) {
+    public Movie(String title, MovieType type) {
         _title = title;
         _type = type;
     }
-    public int getPriceCode() {
+
+    public MovieType getType() {
         return _type;
     }
-    public void setPriceCode(int arg) {
-        _type = arg;
+
+    public void setType(MovieType type) {
+        _type = type;
     }
+
     public String getTitle() {
         return _title;
     }
-    public double rentalCost(int daysRented){
 
-//        switch (getPriceCode()) {
-//            case Movie.REGULAR:
-//                result += 2;
-//                if (daysRented > 2) {
-//                    result += (daysRented - 2) * 1.5;
-//                }
-//                break;
-//            case Movie.NEW_RELEASE:
-//                result += daysRented * 3;
-//                break;
-//            case Movie.CHILDRENS:
-//                result += 1.5;
-//                if (daysRented > 3) {
-//                    result += (daysRented - 3) * 1.5;
-//                }
-//                break;
-//        }
-        return result;
+    public double rentalCost(int daysRented){
+        return getType().rentalCost(daysRented);
     }
     int rentalPoints(int daysRented) {
-
-
-        return getT;
+        return getType().rentalPoints(daysRented);
     }
 
 }

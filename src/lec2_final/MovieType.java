@@ -1,12 +1,15 @@
 package lec2_final;
 
 public interface MovieType {
+    MovieType REGULAR = new Regular();
+    MovieType CHILDRENS = new Childrens();
+    MovieType NEW_RELEASE = new NewRelease();
+
     int rentalPoints(int daysRented);
 
     double rentalCost(int daysRented);
 
     static class Regular implements MovieType {
-
         @Override
         public int rentalPoints(int daysRented) {
             return 1;
@@ -23,7 +26,6 @@ public interface MovieType {
     }
 
     static class Childrens implements MovieType {
-
         @Override
         public int rentalPoints(int daysRented) {
             return 1;
@@ -34,23 +36,20 @@ public interface MovieType {
             double result = 1.5;
             if (daysRented > 3) {
                 result += (daysRented - 3) * 1.5;
-                ;
-            }
+                }
             return result;
         }
     }
 
-    static class NewRellease implements MovieType{
-
+    static class NewRelease implements MovieType{
         @Override
         public int rentalPoints(int daysRented) {
-            return daysRented;
+            return daysRented <2 ? 1 : 2;
         }
 
         @Override
         public double rentalCost(int daysRented) {
-            result += daysRented * 3;
-            return re
+            return daysRented*3;
         }
 
     }

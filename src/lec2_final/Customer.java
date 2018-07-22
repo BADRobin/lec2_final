@@ -22,30 +22,28 @@ public class Customer {
 
     public String statement() {
 
-        String result = "Учет аренды для " + getName() + "\n";
+        StringBuilder result = new StringBuilder("Учет аренды для " + getName() + "\n");
 
         for (Rental rental : _rentals) {
-
-       double thisAmount = rental.rentalCost();
-//показать результаты для этой аренды
-            result += "\t" + rental.getMovie().getTitle() + "\t" +
-                    String.valueOf(thisAmount) + "\n";
-//            totalAmount += thisAmount;
+            result.append("\t").append(rental.getMovie().getTitle()).append("\t").append(String.valueOf(rental.rentalCost())).append("\n");
         }
+        result.append("Сумма задолженности составляет ").append(String.valueOf(getTotalAmount())).append("\n");
+        result.append("Вы заработали ").append(String.valueOf(getFrequentRenterPoints())).append(" очков за активность");
+        return result.toString();
+    }
+        private int getFrequentRenterPoints (){
+            int frequentRenterPoints = 0;
+            for (Rental rental : _rentals){
+                frequentRenterPoints +=rental.rentalPoints();
+            }
+            return frequentRenterPoints;
+        }
+        private double getTotalAmount(){
         double totalAmount = 0;
-        for (Rental rental : _rentals) {
-            totalAmount += rental.rentalCost();
+            for (Rental rental : _rentals) {
+                totalAmount +=rental.rentalCost();
+            }
+            return totalAmount;
         }
-
-        int frequentRenterPoints = 0;
-        for (Rental rental : _rentals) {
-            frequentRenterPoints += rental.rentalPoints();
-        }
-//добавить нижний колонтитул
-        result += "Сумма задолженности составляет " +
-                String.valueOf(totalAmount) + "\n";
-        result += "Вы заработали " + String.valueOf(frequentRenterPoints) + " очков за активность";
-        return result;
     }
 
-}
